@@ -48,10 +48,18 @@ if config_env() == :prod do
   # If you are doing OTP releases, you need to instruct Phoenix
   # to start each relevant endpoint:
   #
-  #     config :hello_config, HelloConfigWeb.Endpoint, server: true
+  config :hello_config, HelloConfigWeb.Endpoint, server: true
   #
   # Then you can assemble a release by calling `mix release`.
   # See `mix help release` for more information.
+
+  welcome =
+    System.get_env("WELCOME") ||
+      raise """
+      environment variable WELCOME is missing.
+      """
+
+  config :hello_config, welcome: welcome
 
   # ## Configuring the mailer
   #
